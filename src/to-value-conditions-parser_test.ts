@@ -1,9 +1,7 @@
 import { deepStrictEqual } from 'assert';
 import { Mock, mockAny } from 'lite-ts-mock';
 
-import { IEnum } from './i-enum';
-import { IEnumFactory } from './i-enum-factory';
-import { IEnumItem } from './i-enum-item';
+import { IEnum, IEnumFactory, IEnumItem } from './i-enum-factory';
 import { ToValueConditionsParser as Self } from './to-value-conditions-parser';
 import { ValueTypeData } from './value-type-data';
 

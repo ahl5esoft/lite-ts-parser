@@ -1,12 +1,12 @@
 import { strictEqual } from 'assert';
 
-import { ToBoolParser } from './to-bool';
-import { ParserFactory as Self } from './factory';
+import { ParserFactory as Self } from './parser-factory';
+import { ToBoolParser } from './to-bool-parser';
 
-describe('src/lite/src/service/parser/factory.ts', () => {
+describe('src/parser-factory.ts', () => {
     describe('.build(type: string)', () => {
         it('default', () => {
-            const self = new Self(null, {});
+            const self = new Self(null, {}, {});
 
             const res = self.build('test');
             strictEqual(
@@ -16,7 +16,7 @@ describe('src/lite/src/service/parser/factory.ts', () => {
         });
 
         it('ok', () => {
-            const self = new Self(null, {});
+            const self = new Self(null, {}, {});
 
             const res = self.build('bool');
             strictEqual(

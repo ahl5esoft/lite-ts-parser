@@ -1,9 +1,7 @@
 import { deepStrictEqual } from 'assert';
 import { Mock, mockAny } from 'lite-ts-mock';
 
-import { IEnum } from './i-enum';
-import { IEnumFactory } from './i-enum-factory';
-import { IEnumItem } from './i-enum-item';
+import { IEnum, IEnumFactory, IEnumItem } from './i-enum-factory';
 import { ToRewardsParser as Self } from './to-rewards-parser';
 import { ValueTypeData } from './value-type-data';
 

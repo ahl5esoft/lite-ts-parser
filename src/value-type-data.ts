@@ -1,4 +1,4 @@
-import { IEnumItem } from './i-enum-item';
+import { IEnumItem } from './i-enum-factory';
 
 export class ValueTypeData implements IEnumItem {
 	public value: number;
