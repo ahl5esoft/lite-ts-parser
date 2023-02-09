@@ -1,6 +1,8 @@
 import { strictEqual } from 'assert';
+import { IParser } from './i-parser';
 
 import { ParserFactory as Self } from './parser-factory';
+import { ParserType } from './parser-type';
 import { ToBoolParser } from './to-bool-parser';
 
 describe('src/parser-factory.ts', () => {
@@ -8,20 +10,40 @@ describe('src/parser-factory.ts', () => {
         it('default', () => {
             const self = new Self(null, {}, {});
 
-            const res = self.build('test');
-            strictEqual(
-                res,
-                Reflect.get(self, 'm_DefaultParser')
-            );
-        });
-
-        it('ok', () => {
-            const self = new Self(null, {}, {});
-
-            const res = self.build('bool');
+            const res = self.build(ParserType.bool);
             strictEqual(
                 res.constructor,
                 ToBoolParser
+            );
+        });
+
+        it('alias', () => {
+            const self = new Self(null, {}, {
+                boolean: ParserType.bool
+            });
+
+            const res = self.build('boolean');
+            strictEqual(
+                res.constructor,
+                ToBoolParser
+            );
+        });
+
+        it('custom', () => {
+            class CustomParser implements IParser {
+                public async parse(v: any) {
+                    return 'c_' + v;
+                }
+            }
+
+            const self = new Self(null, {
+                custom: new CustomParser(),
+            }, {});
+
+            const res = self.build('custom');
+            strictEqual(
+                res.constructor,
+                CustomParser
             );
         });
     });
