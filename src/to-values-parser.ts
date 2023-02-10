@@ -4,7 +4,7 @@ import { IValue } from './i-value';
 import { ValueTypeData } from './value-type-data';
 
 export class ToValuesParser implements IParser {
-	public static reg = /^(.+)*(-?\d+)$/;
+	public static reg = /^(.+)\*(-?\d+)$/;
 
 	public constructor(
 		private m_EnumFactory: IEnumFactory,
@@ -21,14 +21,14 @@ export class ToValuesParser implements IParser {
 			const match = r.match(ToValuesParser.reg);
 			if (!match) throw new Error(`${ToValuesParser.name}.parse: 无效格式(${r})`);
 
-			const enumItem = await valueTypeEnum.get((cr) => {
+			const enumItem = await valueTypeEnum.get(cr => {
 				return cr.text == match[1];
 			});
 			if (!enumItem)
 				throw new Error(`${ToValuesParser.name}.parse: 无效数值名(${r})`);
 
 			const count = Number(match[2]);
-			if (isNaN(count) || count == 0)
+			if (isNaN(count))
 				throw new Error(`${ToValuesParser.name}.parse: 无效数值数量(${r})`);
 
 			res.push({
