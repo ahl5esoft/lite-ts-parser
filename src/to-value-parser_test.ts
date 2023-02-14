@@ -2,12 +2,12 @@ import { deepStrictEqual } from 'assert';
 import { Mock, mockAny } from 'lite-ts-mock';
 
 import { IEnum, IEnumFactory, IEnumItem } from './i-enum-factory';
-import { ToTwoValuesParser as Self } from './to-two-values-parser';
+import { ToValueParser as Self } from './to-value-parser';
 import { ValueTypeData } from './value-type-data';
 
-describe('src/to-two-values-parser.ts', () => {
+describe('src/to-value-parser.ts', () => {
     describe('.parse(v: any)', () => {
-        it('ok', async () => {
+        it('negative', async () => {
             const mockEnumFactory = new Mock<IEnumFactory>();
             const self = new Self(mockEnumFactory.actual);
 
@@ -20,10 +20,22 @@ describe('src/to-two-values-parser.ts', () => {
             mockEnumService.expectReturn(
                 r => r.get(mockAny),
                 {
-                    value: 4,
+                    value: 1,
                 }
             );
 
+            const res = await self.parse(`金币*-13140`);
+            deepStrictEqual(res, {
+                count: -13140,
+                valueType: 1,
+            });
+        });
+
+        it('positive', async () => {
+            const mockEnumFactory = new Mock<IEnumFactory>();
+            const self = new Self(mockEnumFactory.actual);
+
+            const mockEnumService = new Mock<IEnum<IEnumItem>>();
             mockEnumFactory.expectReturn(
                 r => r.build(ValueTypeData.name),
                 mockEnumService.actual
@@ -32,42 +44,15 @@ describe('src/to-two-values-parser.ts', () => {
             mockEnumService.expectReturn(
                 r => r.get(mockAny),
                 {
-                    value: 5,
+                    value: 1,
                 }
             );
 
-            mockEnumFactory.expectReturn(
-                r => r.build(ValueTypeData.name),
-                mockEnumService.actual
-            );
-
-            mockEnumService.expectReturn(
-                r => r.get(mockAny),
-                {
-                    value: 6,
-                }
-            );
-
-            const res = await self.parse(`A*1
-B*2
-
--
-
-C*3`);
-            deepStrictEqual(res, [
-                [{
-                    count: 1,
-                    valueType: 4,
-                }, {
-                    count: 2,
-                    valueType: 5,
-                }],
-                [],
-                [{
-                    count: 3,
-                    valueType: 6
-                }]
-            ]);
+            const res = await self.parse(`金币*13140`);
+            deepStrictEqual(res, {
+                count: 13140,
+                valueType: 1,
+            });
         });
     });
 });

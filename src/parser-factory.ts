@@ -29,7 +29,7 @@ export class ParserFactory extends ParserFactoryBase {
                 [ParserType.json]: new ToJsonParser(),
                 [ParserType.number]: new ToNumberParser(),
                 [ParserType.rewards]: new ToRewardsParser(this.m_EnumFactory),
-                [ParserType.twoValues]: new ToTwoValuesParser(toValuesParser),
+                [ParserType.twoValues]: new ToTwoValuesParser(this.m_EnumFactory),
                 [ParserType.unix]: new ToUnixParser(),
                 [ParserType.valueConditions]: new ToValueConditionsParser(this.m_EnumFactory),
                 [ParserType.values]: toValuesParser,

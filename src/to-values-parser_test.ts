@@ -24,6 +24,11 @@ describe('src/to-values-parser.ts', () => {
                 }
             );
 
+            mockEnumFactory.expectReturn(
+                r => r.build(ValueTypeData.name),
+                mockEnumService.actual
+            );
+
             mockEnumService.expectReturn(
                 r => r.get(mockAny),
                 {
@@ -31,10 +36,10 @@ describe('src/to-values-parser.ts', () => {
                 }
             );
 
-            const res = await self.parse(`金币*3
+            const res = await self.parse(`金币*-13020200000
 钻石*4`);
             deepStrictEqual(res, [{
-                count: 3,
+                count: -13020200000,
                 valueType: 1,
             }, {
                 count: 4,

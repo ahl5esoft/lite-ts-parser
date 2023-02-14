@@ -1,23 +1,24 @@
-import { IParser } from './i-parser';
+import { ToValueParser } from './to-value-parser';
 
-export class ToTwoValuesParser implements IParser {
+export class ToTwoValuesParser extends ToValueParser {
     public static emptyLine = '-';
-
-    public constructor(
-        private m_ToValueParser: IParser,
-    ) { }
 
     public async parse(v: any) {
         if (typeof v != 'string')
             return v;
 
         const lines = v.split(/\r\n|\n|\r/g);
-        const res = [];
+        const res = [[]];
         for (const r of lines) {
-            let childRes = [];
-            if (r != ToTwoValuesParser.emptyLine)
-                childRes = await this.m_ToValueParser.parse(r);
-            res.push(childRes);
+            if (r) {
+                if (r != ToTwoValuesParser.emptyLine) {
+                    res[res.length - 1].push(
+                        await super.parse(r)
+                    );
+                }
+            } else {
+                res.push([]);
+            }
         }
         return res;
     }
