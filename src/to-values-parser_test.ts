@@ -3,7 +3,6 @@ import { Mock, mockAny } from 'lite-ts-mock';
 
 import { IEnum, IEnumFactory, IEnumItem } from './i-enum-factory';
 import { ToValuesParser as Self } from './to-values-parser';
-import { ValueTypeData } from './value-type-data';
 
 describe('src/to-values-parser.ts', () => {
     describe('.parse(v: any)', () => {
@@ -13,7 +12,7 @@ describe('src/to-values-parser.ts', () => {
 
             const mockEnumService = new Mock<IEnum<IEnumItem>>();
             mockEnumFactory.expectReturn(
-                r => r.build(ValueTypeData.name),
+                r => r.build('ValueTypeData'),
                 mockEnumService.actual
             );
 
@@ -25,7 +24,7 @@ describe('src/to-values-parser.ts', () => {
             );
 
             mockEnumFactory.expectReturn(
-                r => r.build(ValueTypeData.name),
+                r => r.build('ValueTypeData'),
                 mockEnumService.actual
             );
 

@@ -1,7 +1,6 @@
 import { IEnumFactory } from './i-enum-factory';
 import { IParser } from './i-parser';
 import { IValue } from './i-value';
-import { ValueTypeData } from './value-type-data';
 
 interface IValueCondition extends IValue {
 	op: string;
@@ -20,7 +19,7 @@ export class ToValueConditionsParser implements IParser {
 
 		const lines = v.split(/\r\n|\n|\r/g);
 		let res: IValueCondition[][] = [[]];
-		const valueTypeEnum = this.m_EnumFactory.build<ValueTypeData>(ValueTypeData.name);
+		const valueTypeEnum = this.m_EnumFactory.build('ValueTypeData');
 		for (const r of lines) {
 			const match = r.match(ToValueConditionsParser.reg);
 			if (!match) {
