@@ -64,12 +64,13 @@ describe('src/to-value-parser.ts', () => {
                 mockEnumService.actual
             );
 
+
             mockEnumService.expectReturn(
                 r => r.get(mockAny),
                 {
                     value: 1,
                     parser: {
-                        exp: 'count*10000'
+                        exp: '(count)=>{return count*10000}'
                     }
                 }
             );

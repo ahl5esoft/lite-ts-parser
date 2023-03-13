@@ -23,9 +23,8 @@ export class ToValueParser implements IParser {
 		if (isNaN(count))
 			throw new Error(`${ToValueParser.name}.parse: 无效数值数量(${v})`);
 
-		if (enumItem.parser?.exp) {
-			count = eval(enumItem.parser.exp);
-		}
+		if (enumItem.parser?.exp)
+			count = eval(enumItem.parser.exp)(count);
 
 		return {
 			count,
