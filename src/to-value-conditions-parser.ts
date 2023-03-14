@@ -37,9 +37,12 @@ export class ToValueConditionsParser implements IParser {
 			if (!enumItem)
 				throw new Error(`${ToValueConditionsParser.name}.parse: 无效数值条件名(${r})`);
 
-			const count = Number(match[4]);
+			let count = Number(match[4]);
 			if (isNaN(count))
 				throw new Error(`${ToValueConditionsParser.name}.parse: 无效数值条件数量(${r})`);
+
+			if (enumItem.parser?.exp)
+				count = eval(enumItem.parser.exp)(count);
 
 			res[res.length - 1].push({
 				count,

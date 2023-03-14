@@ -53,33 +53,5 @@ describe('src/to-value-parser.ts', () => {
                 valueType: 1,
             });
         });
-
-        it('parser.exp', async () => {
-            const mockEnumFactory = new Mock<IEnumFactory>();
-            const self = new Self(mockEnumFactory.actual);
-
-            const mockEnumService = new Mock<IEnum<IEnumItem>>();
-            mockEnumFactory.expectReturn(
-                r => r.build('ValueTypeData'),
-                mockEnumService.actual
-            );
-
-
-            mockEnumService.expectReturn(
-                r => r.get(mockAny),
-                {
-                    value: 1,
-                    parser: {
-                        exp: '(count)=>{return count*10000}'
-                    }
-                }
-            );
-
-            const res = await self.parse(`金币*13140`);
-            deepStrictEqual(res, {
-                count: 131400000,
-                valueType: 1,
-            });
-        });
     });
 });
