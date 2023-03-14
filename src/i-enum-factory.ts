@@ -1,10 +1,7 @@
-export interface IEnumItem {
-    readonly value: number;
+import { ValueTypeData } from 'lite-ts-enum';
+
+export interface IEnumItem extends ValueTypeData {
     readonly key?: string;
-    readonly text?: string;
-    readonly parser?: {
-        exp: string;
-    };
 }
 
 export interface IEnum<T extends IEnumItem> {
