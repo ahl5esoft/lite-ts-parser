@@ -1,16 +1,16 @@
 import { strictEqual } from 'assert';
+import { Enum, EnumFactory, EnumItem } from 'lite-ts-enum';
 import { Mock, mockAny } from 'lite-ts-mock';
 
-import { IEnum, IEnumFactory, IEnumItem } from './i-enum-factory';
 import { ToEnumValueParser as Self } from './to-enum-value-parser';
 
 describe('src/to-enum-value-parser.ts', () => {
     describe('.parse(v: any)', () => {
         it('ok', async () => {
-            const mockEnumFactory = new Mock<IEnumFactory>();
+            const mockEnumFactory = new Mock<EnumFactory>();
             const self = new Self(mockEnumFactory.actual);
 
-            const mockEnumService = new Mock<IEnum<IEnumItem>>();
+            const mockEnumService = new Mock<Enum<EnumItem>>();
             mockEnumFactory.expectReturn(
                 r => r.build('enum'),
                 mockEnumService.actual

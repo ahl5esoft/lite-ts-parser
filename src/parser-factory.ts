@@ -1,4 +1,5 @@
-import { IEnumFactory } from './i-enum-factory';
+import { EnumFactory } from 'lite-ts-enum';
+
 import { IParser } from './i-parser';
 import { ParserFactoryBase } from './parser-factory-base';
 import { ParserType } from './parser-type';
@@ -18,7 +19,7 @@ export class ParserFactory extends ParserFactoryBase {
             return v;
         },
     } as IParser;
-    private m_Parser: { [type: string]: IParser };
+    private m_Parser: { [type: string]: IParser; };
     protected get parser() {
         if (!this.m_Parser) {
             const toValuesParser = new ToValuesParser(this.m_EnumFactory);
@@ -39,9 +40,9 @@ export class ParserFactory extends ParserFactoryBase {
     }
 
     public constructor(
-        private m_EnumFactory: IEnumFactory,
-        private m_ExtParser: { [alias: string]: IParser },
-        private m_AliasOfType: { [alias: string]: string },
+        private m_EnumFactory: EnumFactory,
+        private m_ExtParser: { [alias: string]: IParser; },
+        private m_AliasOfType: { [alias: string]: string; },
     ) {
         super();
     }

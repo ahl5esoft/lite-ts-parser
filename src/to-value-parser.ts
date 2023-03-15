@@ -1,11 +1,12 @@
-import { IEnumFactory } from './i-enum-factory';
+import { EnumFactoryBase } from 'lite-ts-enum';
+
 import { IParser } from './i-parser';
 
 export class ToValueParser implements IParser {
 	public static reg = /^(.+)\*(-?\d+)$/;
 
 	public constructor(
-		private m_EnumFactory: IEnumFactory,
+		private m_EnumFactory: EnumFactoryBase,
 	) { }
 
 	public async parse(v: any) {
