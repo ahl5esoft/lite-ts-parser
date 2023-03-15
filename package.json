@@ -4,6 +4,7 @@
     "url": "https://github.com/ahl5esoft/lite-ts-parser/issues"
   },
   "dependencies": {
+    "lite-ts-enum": "^1.3.0",
     "lite-ts-mock": "^1.1.0",
     "moment": "^2.29.4"
   },
