@@ -1,4 +1,5 @@
-import { IEnumFactory } from './i-enum-factory';
+import { EnumFactory } from 'lite-ts-enum';
+
 import { IParser } from './i-parser';
 
 export interface IToEnumValueParseOption {
@@ -9,7 +10,7 @@ export interface IToEnumValueParseOption {
 
 export class ToEnumValueParser implements IParser {
     public constructor(
-        private m_EnumFactory: IEnumFactory,
+        private m_EnumFactory: EnumFactory,
     ) { }
 
     public async parse(v: IToEnumValueParseOption) {

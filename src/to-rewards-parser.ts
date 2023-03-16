@@ -1,8 +1,8 @@
-import { IEnumFactory } from './i-enum-factory';
-import { IParser } from './i-parser';
-import { IValue } from './i-value';
+import { EnumFactory, Value } from 'lite-ts-enum';
 
-interface IReward extends IValue {
+import { IParser } from './i-parser';
+
+interface IReward extends Value {
 	weight?: number;
 }
 
@@ -10,7 +10,7 @@ export class ToRewardsParser implements IParser {
 	public static reg = /^([^*]+)\*(-?\d+)(\*?(\d+))?$/;
 
 	public constructor(
-		private m_EnumFactory: IEnumFactory,
+		private m_EnumFactory: EnumFactory,
 	) { }
 
 	public async parse(v: any) {

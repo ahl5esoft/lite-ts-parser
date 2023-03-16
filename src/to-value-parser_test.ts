@@ -1,16 +1,16 @@
 import { deepStrictEqual } from 'assert';
+import { Enum, EnumFactory, EnumItem } from 'lite-ts-enum';
 import { Mock, mockAny } from 'lite-ts-mock';
 
-import { IEnum, IEnumFactory, IEnumItem } from './i-enum-factory';
 import { ToValueParser as Self } from './to-value-parser';
 
 describe('src/to-value-parser.ts', () => {
     describe('.parse(v: any)', () => {
         it('negative', async () => {
-            const mockEnumFactory = new Mock<IEnumFactory>();
+            const mockEnumFactory = new Mock<EnumFactory>();
             const self = new Self(mockEnumFactory.actual);
 
-            const mockEnumService = new Mock<IEnum<IEnumItem>>();
+            const mockEnumService = new Mock<Enum<EnumItem>>();
             mockEnumFactory.expectReturn(
                 r => r.build('ValueTypeData'),
                 mockEnumService.actual
@@ -31,10 +31,10 @@ describe('src/to-value-parser.ts', () => {
         });
 
         it('positive', async () => {
-            const mockEnumFactory = new Mock<IEnumFactory>();
+            const mockEnumFactory = new Mock<EnumFactory>();
             const self = new Self(mockEnumFactory.actual);
 
-            const mockEnumService = new Mock<IEnum<IEnumItem>>();
+            const mockEnumService = new Mock<Enum<EnumItem>>();
             mockEnumFactory.expectReturn(
                 r => r.build('ValueTypeData'),
                 mockEnumService.actual
