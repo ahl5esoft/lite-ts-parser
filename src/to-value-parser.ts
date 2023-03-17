@@ -1,4 +1,4 @@
-import { EnumFactoryBase } from 'lite-ts-enum';
+import { EnumFactoryBase, ValueTypeData } from 'lite-ts-enum';
 
 import { IParser } from './i-parser';
 
@@ -14,7 +14,7 @@ export class ToValueParser implements IParser {
 		if (!match)
 			throw new Error(`${ToValueParser.name}.parse: 无效格式(${v})`);
 
-		const enumItem = await this.m_EnumFactory.build('ValueTypeData').get(cr => {
+		const enumItem = await this.m_EnumFactory.build<ValueTypeData>('ValueTypeData').get(cr => {
 			return cr.text == match[1];
 		});
 		if (!enumItem)
