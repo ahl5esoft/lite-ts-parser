@@ -1,4 +1,4 @@
-import { EnumFactory } from 'lite-ts-enum';
+import { EnumFactoryBase } from 'lite-ts-enum';
 
 import { IParser } from './i-parser';
 import { ParserFactoryBase } from './parser-factory-base';
@@ -40,7 +40,7 @@ export class ParserFactory extends ParserFactoryBase {
     }
 
     public constructor(
-        private m_EnumFactory: EnumFactory,
+        private m_EnumFactory: EnumFactoryBase,
         private m_ExtParser: { [alias: string]: IParser; },
         private m_AliasOfType: { [alias: string]: string; },
     ) {

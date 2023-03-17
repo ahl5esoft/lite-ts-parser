@@ -1,16 +1,12 @@
-import { EnumFactory, Value } from 'lite-ts-enum';
+import { EnumFactoryBase, ValueCondition, ValueTypeData } from 'lite-ts-enum';
 
 import { IParser } from './i-parser';
-
-interface IValueCondition extends Value {
-	op: string;
-}
 
 export class ToValueConditionsParser implements IParser {
 	public static reg = /^([^=><%-]+)(%|now-diff)*([=><]+)(-?\d+(\.?\d+)?)$/;
 
 	public constructor(
-		private m_EnumFactory: EnumFactory,
+		private m_EnumFactory: EnumFactoryBase,
 	) { }
 
 	public async parse(v: any) {
@@ -18,8 +14,8 @@ export class ToValueConditionsParser implements IParser {
 			return v;
 
 		const lines = v.split(/\r\n|\n|\r/g);
-		let res: IValueCondition[][] = [[]];
-		const valueTypeEnum = this.m_EnumFactory.build('ValueTypeData');
+		let res: ValueCondition[][] = [[]];
+		const valueTypeEnum = this.m_EnumFactory.build<ValueTypeData>('ValueTypeData');
 		for (const r of lines) {
 			const match = r.match(ToValueConditionsParser.reg);
 			if (!match) {

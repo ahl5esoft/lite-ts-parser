@@ -1,4 +1,4 @@
-import { EnumFactory, Value } from 'lite-ts-enum';
+import { EnumFactoryBase, Value } from 'lite-ts-enum';
 
 import { IParser } from './i-parser';
 
@@ -10,7 +10,7 @@ export class ToRewardsParser implements IParser {
 	public static reg = /^([^*]+)\*(-?\d+)(\*?(\d+))?$/;
 
 	public constructor(
-		private m_EnumFactory: EnumFactory,
+		private m_EnumFactory: EnumFactoryBase,
 	) { }
 
 	public async parse(v: any) {
