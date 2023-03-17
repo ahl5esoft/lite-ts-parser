@@ -1,4 +1,4 @@
-import { EnumFactoryBase, Value } from 'lite-ts-enum';
+import { EnumFactoryBase, Value, ValueTypeData } from 'lite-ts-enum';
 
 import { IParser } from './i-parser';
 
@@ -19,7 +19,7 @@ export class ToRewardsParser implements IParser {
 
 		const lines = v.split(/\r\n|\n|\r/g);
 		const res: IReward[][] = [[]];
-		const valueTypeEnum = this.m_EnumFactory.build('ValueTypeData');
+		const valueTypeEnum = this.m_EnumFactory.build<ValueTypeData>('ValueTypeData');
 		for (const r of lines) {
 			const match = r.match(ToRewardsParser.reg);
 			if (!match) {
@@ -37,9 +37,12 @@ export class ToRewardsParser implements IParser {
 			if (!enumItem)
 				throw new Error(`${ToRewardsParser.name}.parse: 无效奖励名(${r})`);
 
-			const count = Number(match[2]);
+			let count = Number(match[2]);
 			if (isNaN(count))
 				throw new Error(`${ToRewardsParser.name}.parse: 无效奖励数量(${r})`);
+
+			if (enumItem.parser?.exp)
+				count = eval(enumItem.parser.exp)(count);
 
 			res[res.length - 1].push({
 				count,
