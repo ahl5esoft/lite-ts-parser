@@ -37,9 +37,12 @@ export class ToRewardsParser implements IParser {
 			if (!enumItem)
 				throw new Error(`${ToRewardsParser.name}.parse: 无效奖励名(${r})`);
 
-			const count = Number(match[2]);
+			let count = Number(match[2]);
 			if (isNaN(count))
 				throw new Error(`${ToRewardsParser.name}.parse: 无效奖励数量(${r})`);
+
+			if (enumItem.parser?.exp)
+				count = eval(enumItem.parser.exp)(count);
 
 			res[res.length - 1].push({
 				count,
