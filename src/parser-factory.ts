@@ -4,6 +4,7 @@ import { IParser } from './i-parser';
 import { ParserFactoryBase } from './parser-factory-base';
 import { ParserType } from './parser-type';
 import { ToBoolParser } from './to-bool-parser';
+import { ToBigIntegerParser } from './to-big-integer-parser';
 import { ToEnumValueParser } from './to-enum-value-parser';
 import { ToJsonParser } from './to-json-parser';
 import { ToNumberParser } from './to-number-parser';
@@ -34,6 +35,7 @@ export class ParserFactory extends ParserFactoryBase {
                 [ParserType.unix]: new ToUnixParser(),
                 [ParserType.valueConditions]: new ToValueConditionsParser(this.m_EnumFactory),
                 [ParserType.values]: toValuesParser,
+                [ParserType.big]: new ToBigIntegerParser()
             };
         }
         return this.m_Parser;

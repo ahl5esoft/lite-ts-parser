@@ -44,7 +44,7 @@ describe('src/to-value-conditions-parser.ts', () => {
                 }
             );
 
-            const res = await self.parse(`A>5
+            const res = await self.parse(`A>5e10
 B<6
 
 C%=7
@@ -52,7 +52,7 @@ C%=7
 Dnow-diff>8`);
             deepStrictEqual(res, [
                 [{
-                    count: 5,
+                    count: '50000000000',
                     op: '>',
                     valueType: 1
                 }, {
