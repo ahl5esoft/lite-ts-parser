@@ -1,6 +1,6 @@
 
 export class BigIntegerBase {
-    public static reg = /^(\d+(.\d+)?)e(\d+)$/i;
+    public static reg = /^(-?\d+(.\d+)?)e(\d+)$/i;
 
     public async change(v: any) {
         if (typeof v == 'string') {
