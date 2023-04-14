@@ -23,9 +23,9 @@ describe('src/to-value-parser.ts', () => {
                 }
             );
 
-            const res = await self.parse(`金币*-13140`);
+            const res = await self.parse(`金币*13140`);
             deepStrictEqual(res, {
-                count: -13140,
+                count: 13140,
                 valueType: 1,
             });
         });

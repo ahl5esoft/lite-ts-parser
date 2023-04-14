@@ -1,13 +1,16 @@
 import { EnumFactoryBase, ValueCondition, ValueTypeData } from 'lite-ts-enum';
 
+import { BigIntegerBase } from './big-integer-base';
 import { IParser } from './i-parser';
 
-export class ToValueConditionsParser implements IParser {
-	public static reg = /^([^=><%-]+)(%|now-diff)*([=><]+)(-?\d+(\.?\d+)?)$/;
+export class ToValueConditionsParser extends BigIntegerBase implements IParser {
+	public static reg = /^([^=><%-]+)(%|now-diff)*([=><]+)(-?\d+(.\d+)?([eE]\d+)?)$/;
 
 	public constructor(
 		private m_EnumFactory: EnumFactoryBase,
-	) { }
+	) {
+		super();
+	}
 
 	public async parse(v: any) {
 		if (typeof v != 'string')
@@ -33,12 +36,17 @@ export class ToValueConditionsParser implements IParser {
 			if (!enumItem)
 				throw new Error(`${ToValueConditionsParser.name}.parse: 无效数值条件名(${r})`);
 
-			let count = Number(match[4]);
-			if (isNaN(count))
-				throw new Error(`${ToValueConditionsParser.name}.parse: 无效数值条件数量(${r})`);
+			let count = 0;
+			if (match[4].includes('e')) {
+				count = await this.change(match[4]);
+			} else {
+				count = Number(match[4]);
+				if (isNaN(count))
+					throw new Error(`${ToValueConditionsParser.name}.parse: 无效数值条件数量(${r})`);
+			}
 
 			if (enumItem.parser?.exp)
-				count = eval(enumItem.parser.exp)(count);
+				count = eval(enumItem.parser.exp)(Number(count));
 
 			res[res.length - 1].push({
 				count,

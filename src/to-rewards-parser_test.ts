@@ -40,7 +40,7 @@ describe('src/to-rewards-parser.ts', () => {
             const res = await self.parse(`金币*3*4
 金币*5*6
 
-钻石*7`);
+钻石*7e10`);
             deepStrictEqual(res, [
                 [{
                     count: 3,
@@ -52,7 +52,7 @@ describe('src/to-rewards-parser.ts', () => {
                     weight: 6
                 }],
                 [{
-                    count: 7,
+                    count: '70000000000',
                     valueType: 2,
                     weight: 0
                 }]
