@@ -25,7 +25,7 @@ export class ToValueParser extends BigIntegerBase implements IParser {
 
 		let count = 0;
 		if (match[2].includes('e')) {
-			count = await this.change(match[2]);
+			count = this.change(match[2]);
 		} else {
 			count = Number(match[2]);
 			if (isNaN(count))
