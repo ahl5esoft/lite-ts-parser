@@ -4,7 +4,7 @@ import { IParser } from './i-parser';
 import { BigIntegerBase } from './big-integer-base';
 
 export class ToValueParser extends BigIntegerBase implements IParser {
-	public static reg = /^([^-?\d]+)([\d.e+-]+)$/;
+	public static reg = /^(.+)\*(-?[\.e\d]+)$/;
 
 	public constructor(
 		private m_EnumFactory: EnumFactoryBase,

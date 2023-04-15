@@ -4,7 +4,7 @@ import { BigIntegerBase } from './big-integer-base';
 import { IParser } from './i-parser';
 
 export class ToValueConditionsParser extends BigIntegerBase implements IParser {
-	public static reg = /^([^=><%-]+)(%|now-diff)*([=><]+)(-?\d+(.\d+)?([eE]\d+)?)$/;
+	public static reg = /^([^=><%-]+)(%|now-diff)*([=><]+)(-?\d+([\.e\d]+)?)$/;
 
 	public constructor(
 		private m_EnumFactory: EnumFactoryBase,

@@ -8,7 +8,7 @@ interface IReward extends Value {
 }
 
 export class ToRewardsParser extends BigIntegerBase implements IParser {
-	public static reg = /^(\D+)(\d+(?:e\d+)?)?(\*\d+)?(\d+)?$/;
+	public static reg = /^([^*]+)\*(-?[\de\.]+)(\*?(\d+))?$/;
 
 	public constructor(
 		private m_EnumFactory: EnumFactoryBase,
