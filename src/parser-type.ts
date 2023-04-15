@@ -1,6 +1,6 @@
 export enum ParserType {
     bool = 'bool',
-    big = 'big',
+    bigint = 'bigint',
     enumValue = '枚举值',
     json = 'json',
     number = 'number',

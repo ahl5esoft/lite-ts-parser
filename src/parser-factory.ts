@@ -35,7 +35,7 @@ export class ParserFactory extends ParserFactoryBase {
                 [ParserType.unix]: new ToUnixParser(),
                 [ParserType.valueConditions]: new ToValueConditionsParser(this.m_EnumFactory),
                 [ParserType.values]: toValuesParser,
-                [ParserType.big]: new ToBigIntegerParser()
+                [ParserType.bigint]: new ToBigIntegerParser()
             };
         }
         return this.m_Parser;
