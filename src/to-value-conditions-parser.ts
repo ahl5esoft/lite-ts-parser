@@ -38,7 +38,7 @@ export class ToValueConditionsParser extends BigIntegerBase implements IParser {
 
 			let count = 0;
 			if (match[4].includes('e')) {
-				count = await this.change(match[4]);
+				count = this.change(match[4]);
 			} else {
 				count = Number(match[4]);
 				if (isNaN(count))
