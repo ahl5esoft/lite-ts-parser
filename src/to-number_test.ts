@@ -1,8 +1,8 @@
 import { strictEqual } from 'assert';
 
-import { ToNumberParser as Self } from './to-number-parser';
+import { ToNumberParser as Self } from './to-number';
 
-describe('src/to-number-parser.ts', () => {
+describe('src/to-number.ts', () => {
     describe('.parse(v: any)', () => {
         it('string', async () => {
             const self = new Self();

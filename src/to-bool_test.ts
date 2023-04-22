@@ -1,8 +1,8 @@
 import { strictEqual } from 'assert';
 
-import { ToBoolParser as Self } from './to-bool-parser';
+import { ToBoolParser as Self } from './to-bool';
 
-describe('src/to-bool-paser.ts', () => {
+describe('src/to-bool.ts', () => {
     describe('.parse(v: any)', () => {
         it('bool', async () => {
             const self = new Self();

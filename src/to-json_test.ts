@@ -1,8 +1,8 @@
 import { deepStrictEqual, strictEqual } from 'assert';
 
-import { ToJsonParser as Self } from './to-json-parser';
+import { ToJsonParser as Self } from './to-json';
 
-describe('src/to-json-parser.ts', () => {
+describe('src/to-json.ts', () => {
     describe('.parse(v: any)', () => {
         it('string', async () => {
             const self = new Self();

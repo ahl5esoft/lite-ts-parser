@@ -1,11 +1,11 @@
 import { strictEqual } from 'assert';
 import { IParser } from './i-parser';
 
-import { ParserFactory as Self } from './parser-factory';
-import { ParserType } from './parser-type';
-import { ToBoolParser } from './to-bool-parser';
+import { ParserFactory as Self } from './factory';
+import { ParserType } from './type';
+import { ToBoolParser } from './to-bool';
 
-describe('src/parser-factory.ts', () => {
+describe('src/factory.ts', () => {
     describe('.build(type: string)', () => {
         it('default', () => {
             const self = new Self(null, {}, {});

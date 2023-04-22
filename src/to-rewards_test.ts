@@ -2,9 +2,11 @@ import { deepStrictEqual } from 'assert';
 import { Enum, EnumFactoryBase, EnumItem } from 'lite-ts-enum';
 import { Mock, mockAny } from 'lite-ts-mock';
 
-import { ToRewardsParser as Self } from './to-rewards-parser';
+import { ParserFactoryBase } from './factory-base';
+import { ToRewardsParser as Self } from './to-rewards';
+import { ValueTypeData } from './value-type-data';
 
-describe('src/to-rewards-parser.ts', () => {
+describe('src/to-rewards.ts', () => {
     describe('.parse(v: any)', () => {
         it('ok', async () => {
             const mockEnumFactory = new Mock<EnumFactoryBase>();
@@ -12,7 +14,11 @@ describe('src/to-rewards-parser.ts', () => {
 
             const mockEnumService = new Mock<Enum<EnumItem>>();
             mockEnumFactory.expectReturn(
-                r => r.build('ValueTypeData'),
+                r => r.build({
+                    app: 'config',
+                    areaNo: ParserFactoryBase.areaNo,
+                    ctor: ValueTypeData
+                }),
                 mockEnumService.actual
             );
 

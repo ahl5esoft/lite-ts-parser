@@ -1,18 +1,18 @@
 import { EnumFactoryBase } from 'lite-ts-enum';
 
 import { IParser } from './i-parser';
-import { ParserFactoryBase } from './parser-factory-base';
-import { ParserType } from './parser-type';
-import { ToBoolParser } from './to-bool-parser';
-import { ToBigIntegerParser } from './to-big-integer-parser';
-import { ToEnumValueParser } from './to-enum-value-parser';
-import { ToJsonParser } from './to-json-parser';
-import { ToNumberParser } from './to-number-parser';
-import { ToRewardsParser } from './to-rewards-parser';
-import { ToTwoValuesParser } from './to-two-values-parser';
-import { ToUnixParser } from './to-unix-parser';
-import { ToValueConditionsParser } from './to-value-conditions-parser';
-import { ToValuesParser } from './to-values-parser';
+import { ParserFactoryBase } from './factory-base';
+import { ParserType } from './type';
+import { ToBoolParser } from './to-bool';
+import { ToBigIntegerParser } from './to-big-integer';
+import { ToEnumValueParser } from './to-enum-value';
+import { ToJsonParser } from './to-json';
+import { ToNumberParser } from './to-number';
+import { ToRewardsParser } from './to-rewards';
+import { ToTwoValuesParser } from './to-two-values';
+import { ToUnixParser } from './to-unix';
+import { ToValueConditionsParser } from './to-value-conditions';
+import { ToValuesParser } from './to-values';
 
 export class ParserFactory extends ParserFactoryBase {
     private m_DefaultParser = {
@@ -44,7 +44,7 @@ export class ParserFactory extends ParserFactoryBase {
     public constructor(
         private m_EnumFactory: EnumFactoryBase,
         private m_ExtParser: { [alias: string]: IParser; },
-        private m_AliasOfType: { [alias: string]: string; },
+        private m_AliasOfType: { [alias: string]: string; }
     ) {
         super();
     }

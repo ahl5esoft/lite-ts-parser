@@ -1,8 +1,8 @@
 import { strictEqual } from 'assert';
 
-import { ToBigIntegerParser as Self } from './to-big-integer-parser';
+import { ToBigIntegerParser as Self } from './to-big-integer';
 
-describe('src/to-big-integer-parser.ts', () => {
+describe('src/to-big-integer.ts', () => {
     describe('.build(type: string)', () => {
         it('default', async () => {
             const self = new Self();

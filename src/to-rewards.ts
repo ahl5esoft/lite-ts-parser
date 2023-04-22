@@ -1,13 +1,12 @@
-import { EnumFactoryBase, Value, ValueTypeData } from 'lite-ts-enum';
+import { EnumFactoryBase } from 'lite-ts-enum';
+import { Reward } from 'lite-ts-value';
 
-import { BigIntegerBase } from './big-integer-base';
 import { IParser } from './i-parser';
+import { ParserFactoryBase } from './factory-base';
+import { ToBigIntegerParser } from './to-big-integer';
+import { ValueTypeData } from './value-type-data';
 
-interface IReward extends Value {
-	weight?: number;
-}
-
-export class ToRewardsParser extends BigIntegerBase implements IParser {
+export class ToRewardsParser extends ToBigIntegerParser implements IParser {
 	public static reg = /^([^*]+)\*(-?[\de\.]+)(\*?(\d+))?$/;
 
 	public constructor(
@@ -21,8 +20,12 @@ export class ToRewardsParser extends BigIntegerBase implements IParser {
 			return v;
 
 		const lines = v.split(/\r\n|\n|\r/g);
-		const res: IReward[][] = [[]];
-		const valueTypeEnum = this.m_EnumFactory.build<ValueTypeData>('ValueTypeData');
+		const res: Reward[][] = [[]];
+		const valueTypeEnum = this.m_EnumFactory.build({
+			app: 'config',
+			areaNo: ParserFactoryBase.areaNo,
+			ctor: ValueTypeData
+		});
 		for (const r of lines) {
 			const match = r.match(ToRewardsParser.reg);
 			if (!match) {
@@ -41,7 +44,7 @@ export class ToRewardsParser extends BigIntegerBase implements IParser {
 				throw new Error(`${ToRewardsParser.name}.parse: 无效奖励名(${r})`);
 			let count = 0;
 			if (match[2].includes('e')) {
-				count = this.change(match[2]);
+				count = await super.parse(match[2]);
 			} else {
 				count = Number(match[2]);
 				if (isNaN(count))

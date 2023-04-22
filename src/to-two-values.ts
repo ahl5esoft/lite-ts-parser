@@ -1,4 +1,4 @@
-import { ToValueParser } from './to-value-parser';
+import { ToValueParser } from './to-value';
 
 export class ToTwoValuesParser extends ToValueParser {
     public static emptyLine = '-';

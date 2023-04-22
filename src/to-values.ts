@@ -1,6 +1,6 @@
-import { Value } from 'lite-ts-enum';
+import { Value } from 'lite-ts-value';
 
-import { ToValueParser } from './to-value-parser';
+import { ToValueParser } from './to-value';
 
 export class ToValuesParser extends ToValueParser {
 	public async parse(v: any) {

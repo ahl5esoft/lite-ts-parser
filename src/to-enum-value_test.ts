@@ -2,17 +2,22 @@ import { strictEqual } from 'assert';
 import { Enum, EnumFactoryBase, EnumItem } from 'lite-ts-enum';
 import { Mock, mockAny } from 'lite-ts-mock';
 
-import { ToEnumValueParser as Self } from './to-enum-value-parser';
+import { ParserFactoryBase } from './factory-base';
+import { ToEnumValueParser as Self } from './to-enum-value';
 
-describe('src/to-enum-value-parser.ts', () => {
-    describe('.parse(v: any)', () => {
+describe('src/to-enum-value.ts', () => {
+    describe('.parse(v: ToEnumValueParseOption)', () => {
         it('ok', async () => {
             const mockEnumFactory = new Mock<EnumFactoryBase>();
             const self = new Self(mockEnumFactory.actual);
 
             const mockEnumService = new Mock<Enum<EnumItem>>();
             mockEnumFactory.expectReturn(
-                r => r.build('enum'),
+                r => r.build({
+                    app: 'cc',
+                    areaNo: ParserFactoryBase.areaNo,
+                    name: 'enum'
+                }),
                 mockEnumService.actual
             );
 
@@ -24,6 +29,7 @@ describe('src/to-enum-value-parser.ts', () => {
             );
 
             const res = await self.parse({
+                app: 'cc',
                 enumName: 'enum',
                 itemField: 'f',
                 itemValue: 'v'

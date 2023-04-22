@@ -1,9 +1,12 @@
-import { EnumFactoryBase, ValueCondition, ValueTypeData } from 'lite-ts-enum';
+import { EnumFactoryBase } from 'lite-ts-enum';
+import { ValueCondition } from 'lite-ts-value';
 
-import { BigIntegerBase } from './big-integer-base';
 import { IParser } from './i-parser';
+import { ParserFactoryBase } from './factory-base';
+import { ToBigIntegerParser } from './to-big-integer';
+import { ValueTypeData } from './value-type-data';
 
-export class ToValueConditionsParser extends BigIntegerBase implements IParser {
+export class ToValueConditionsParser extends ToBigIntegerParser implements IParser {
 	public static reg = /^([^=><%-]+)(%|now-diff)*([=><]+)(-?\d+([\.e\d]+)?)$/;
 
 	public constructor(
@@ -18,7 +21,11 @@ export class ToValueConditionsParser extends BigIntegerBase implements IParser {
 
 		const lines = v.split(/\r\n|\n|\r/g);
 		let res: ValueCondition[][] = [[]];
-		const valueTypeEnum = this.m_EnumFactory.build<ValueTypeData>('ValueTypeData');
+		const valueTypeEnum = this.m_EnumFactory.build({
+			app: 'config',
+			areaNo: ParserFactoryBase.areaNo,
+			ctor: ValueTypeData,
+		});
 		for (const r of lines) {
 			const match = r.match(ToValueConditionsParser.reg);
 			if (!match) {
@@ -38,7 +45,7 @@ export class ToValueConditionsParser extends BigIntegerBase implements IParser {
 
 			let count = 0;
 			if (match[4].includes('e')) {
-				count = this.change(match[4]);
+				count = await super.parse(match[4]);
 			} else {
 				count = Number(match[4]);
 				if (isNaN(count))

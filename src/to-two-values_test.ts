@@ -2,9 +2,11 @@ import { deepStrictEqual } from 'assert';
 import { Enum, EnumFactory, EnumItem } from 'lite-ts-enum';
 import { Mock, mockAny } from 'lite-ts-mock';
 
-import { ToTwoValuesParser as Self } from './to-two-values-parser';
+import { ParserFactoryBase } from './factory-base';
+import { ToTwoValuesParser as Self } from './to-two-values';
+import { ValueTypeData } from './value-type-data';
 
-describe('src/to-two-values-parser.ts', () => {
+describe('src/to-two-values.ts', () => {
     describe('.parse(v: any)', () => {
         it('ok', async () => {
             const mockEnumFactory = new Mock<EnumFactory>();
@@ -12,7 +14,11 @@ describe('src/to-two-values-parser.ts', () => {
 
             const mockEnumService = new Mock<Enum<EnumItem>>();
             mockEnumFactory.expectReturn(
-                r => r.build('ValueTypeData'),
+                r => r.build({
+                    app: 'config',
+                    areaNo: ParserFactoryBase.areaNo,
+                    ctor: ValueTypeData
+                }),
                 mockEnumService.actual
             );
 
@@ -24,7 +30,11 @@ describe('src/to-two-values-parser.ts', () => {
             );
 
             mockEnumFactory.expectReturn(
-                r => r.build('ValueTypeData'),
+                r => r.build({
+                    app: 'config',
+                    areaNo: ParserFactoryBase.areaNo,
+                    ctor: ValueTypeData
+                }),
                 mockEnumService.actual
             );
 
@@ -36,7 +46,11 @@ describe('src/to-two-values-parser.ts', () => {
             );
 
             mockEnumFactory.expectReturn(
-                r => r.build('ValueTypeData'),
+                r => r.build({
+                    app: 'config',
+                    areaNo: ParserFactoryBase.areaNo,
+                    ctor: ValueTypeData
+                }),
                 mockEnumService.actual
             );
 
