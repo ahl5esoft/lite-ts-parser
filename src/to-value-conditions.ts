@@ -53,9 +53,8 @@ export class ToValueConditionsParser extends ToBigIntegerParser implements IPars
 					throw new Error(`${ToValueConditionsParser.name}.parse: 无效数值条件数量(${r})`);
 			}
 
-			const expString = enumItem.parser?.exp ?? '';
-			if (expString)
-				count = new ExpFactory().build(expString).eval(count);
+			if (enumItem.parser?.exp)
+				count = new ExpFactory().build(match[4], enumItem.parser.exp).eval(count);
 
 			res[res.length - 1].push({
 				count,

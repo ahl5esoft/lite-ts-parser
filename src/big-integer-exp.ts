@@ -1,15 +1,15 @@
 import { IExp } from './i-exp';
 
 export class BigIntegerExp implements IExp {
-    private regex = /\d+/;
+    public static regex = /\d+/;
 
     public constructor(
         private exp: string
     ) { }
 
     public eval(count: number) {
-        const matches = this.exp.match(this.regex);
-        const symbol = this.exp.substring(matches.index - 1, matches.index);
-        return (eval(`${BigInt(matches[0])}${symbol}${BigInt(count)}`)).toString();
+        const match = this.exp.match(BigIntegerExp.regex);
+        const exp = this.exp.replace(match[0], match[0] + 'n');
+        return eval(exp)(BigInt(count)).toString();
     }
 }

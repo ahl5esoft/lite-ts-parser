@@ -39,9 +39,8 @@ export class ToValueParser extends ToBigIntegerParser implements IParser {
 				throw new Error(`${ToValueParser.name}.parse: 无效数值数量(${v})`);
 		}
 
-		const expString = enumItem.parser?.exp ?? '';
-		if (expString)
-			count = new ExpFactory().build(expString).eval(count);
+		if (enumItem.parser?.exp)
+			count = new ExpFactory().build(match[2], enumItem.parser.exp).eval(count);
 
 		return {
 			count,
