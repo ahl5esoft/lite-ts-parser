@@ -1,5 +1,6 @@
 import { EnumFactoryBase } from 'lite-ts-enum';
 
+import { ExpFactory } from './exp-factory';
 import { ParserFactoryBase } from './factory-base';
 import { IParser } from './i-parser';
 import { ToBigIntegerParser } from './to-big-integer';
@@ -38,8 +39,9 @@ export class ToValueParser extends ToBigIntegerParser implements IParser {
 				throw new Error(`${ToValueParser.name}.parse: 无效数值数量(${v})`);
 		}
 
-		if (enumItem.parser?.exp)
-			count = eval(enumItem.parser.exp)(count);
+		const expString = enumItem.parser?.exp ?? '';
+		if (expString)
+			count = new ExpFactory().build(expString).eval(count);
 
 		return {
 			count,
