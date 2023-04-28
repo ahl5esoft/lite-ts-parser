@@ -52,10 +52,8 @@ export class ToRewardsParser extends ToBigIntegerParser implements IParser {
 					throw new Error(`${ToRewardsParser.name}.parse: 无效奖励数量(${r})`);
 			}
 
-			const expString = enumItem.parser?.exp ?? '';
-			if (expString)
-				count = new ExpFactory().build(expString).eval(count);
-
+			if (enumItem.parser?.exp)
+				count = new ExpFactory().build(match[2], enumItem.parser.exp).eval(count);
 
 			res[res.length - 1].push({
 				count,

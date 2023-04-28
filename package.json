@@ -4,9 +4,9 @@
     "url": "https://github.com/ahl5esoft/lite-ts-parser/issues"
   },
   "dependencies": {
-    "lite-ts-enum": "^2.10.1",
+    "lite-ts-enum": "^3.11.1",
     "lite-ts-mock": "^1.1.0",
-    "lite-ts-value": "^2.21.0",
+    "lite-ts-value": "^3.21.0",
     "moment": "^2.29.4"
   },
   "description": "解析器",
